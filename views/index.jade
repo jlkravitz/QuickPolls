@@ -1,0 +1,31 @@
+extends layout
+
+block content
+	h1= title
+	p Welcome to #{title}
+	form(method="post")
+		div
+			span Question:
+			input(type="text", name="title", placeholder="What to ask?", id="newPollQuestion")
+		template#newPollChoiceTemplate
+			div
+				span Choice:
+				input(type="text", class="newPollChoice")
+		a(href='#', id='addNewPollChoice') Add Choice
+		div#editArticleSubmit
+			input(type="submit", value="Send")
+
+	script
+		$('#addNewPollChoice').on('click', function(e) {
+			var choiceHtml = $('#newPollChoiceTemplate').html();
+			$('form div').first().append(choiceHtml);
+			e.preventDefault();
+		});
+
+		$('form').on('submit', function() {
+			var choices = [];
+			$('.newPollChoice').each(function(index, choice) {
+				choices.push(choice);
+			});
+			return false;
+		})
