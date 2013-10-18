@@ -3,7 +3,7 @@ extends layout
 block content
 	div.container
 		h1= title
-		p Welcome to #{title}
+		p The fastest way to make polls.
 		form(action="/poll/create", method="post")
 			div.form-group
 				label(for="newPollQuestion") Question
