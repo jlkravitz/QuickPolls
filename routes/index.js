@@ -38,7 +38,7 @@ exports.showPoll = function(req, res){
 				code: req.params.code
 			});
 		} else {
-			res.status(404).send('Poll Not Found.');
+			res.status(404).send('Poll not found.');
 		}
 	});
 };
@@ -49,6 +49,21 @@ exports.vote = function(req, res){
 			res.status(404).send('Cannot Vote on Nonexistent Poll.');
 		} else {
 			res.redirect('/poll/' + req.body.code);
+		}
+	});
+};
+
+exports.pollResults = function(req, res){
+	pollProvider.findByCode(req.params.code, function(error, poll){
+		if (poll){
+			res.render('results', {
+				title: poll.question,
+				question: poll.question,
+				choices: poll.choices,
+				votes: poll.votes
+			});
+		} else {
+			res.status(404).send('Poll not found.');
 		}
 	});
 };

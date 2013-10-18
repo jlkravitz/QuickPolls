@@ -32,6 +32,7 @@ app.get('/', routes.index);
 app.post('/poll/create', routes.createPoll);
 app.get('/poll/:code', routes.showPoll);
 app.post('/poll/vote', routes.vote);
+app.get('/poll/results/:code', routes.pollResults);
 app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){
