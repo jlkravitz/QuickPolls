@@ -1,0 +1,9 @@
+extends layout
+
+block content
+	div.container
+		h1= question
+		ul
+			each votes, choice in choices
+				li= choice
+				| #{votes}
