@@ -1,31 +1,58 @@
 extends layout
 
 block content
-	h1= title
-	p Welcome to #{title}
-	form(method="post")
-		div
-			span Question:
-			input(type="text", name="title", placeholder="What to ask?", id="newPollQuestion")
-		template#newPollChoiceTemplate
-			div
-				span Choice:
-				input(type="text", class="newPollChoice")
-		a(href='#', id='addNewPollChoice') Add Choice
-		div#editArticleSubmit
-			input(type="submit", value="Send")
+	div.container
+		h1= title
+		p Welcome to #{title}
+		form(action="/", method="get")
+			div.form-group
+				label(for="newPollQuestion") Question
+				input(type="text", name="question", placeholder="What would you like to ask?", class="form-control", id="newPollQuestion")
+			div.form-group#poll-choices
+				label Choices
+			button(type="button", class="btn btn-link", id="addPollChoice") Add Choice
+			br
+			button(type="submit", class="btn btn-default") Submit
 
-	script
-		$('#addNewPollChoice').on('click', function(e) {
-			var choiceHtml = $('#newPollChoiceTemplate').html();
-			$('form div').first().append(choiceHtml);
-			e.preventDefault();
+		template#newPollChoiceTemplate
+			div.form-group
+				button.close.closePollChoice x
+				input(type="text", name="choice_{{id}}", placeholder="Choice {{id}} (optional)", class="form-control newPollChoice")
+
+	script.
+		var currentId = 1; // id of current choice
+
+		appendNewChoice();
+		appendNewChoice();
+		appendNewChoice();
+
+		$('#addPollChoice').on('click', function(e) {
+			appendNewChoice();
+		});
+
+		$('.closePollChoice').on('click', function(e) {
+			$(this).parent().remove();
 		});
 
 		$('form').on('submit', function() {
+			if ($('#newPollQuestion').val() === '') {
+				$(this).children().first().addClass('has-error');
+				return false;
+			}
+
 			var choices = [];
 			$('.newPollChoice').each(function(index, choice) {
-				choices.push(choice);
+				if (choice.value === '') {
+					$(this).parent().remove();
+				}
 			});
-			return false;
-		})
+
+			return true;
+		});
+
+		function appendNewChoice() {
+			var choiceHtml = $('#newPollChoiceTemplate').html();
+			choiceHtml = choiceHtml.replace(/{{id}}/g, currentId.toString());
+			$('#poll-choices').first().append(choiceHtml);
+			++currentId;
+		}
