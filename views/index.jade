@@ -17,7 +17,7 @@ block content
 		template#newPollChoiceTemplate
 			div.form-group
 				button.close.closePollChoice x
-				input(type="text", name="choice_{{id}}", placeholder="Choice {{id}} (optional)", class="form-control newPollChoice")
+				input(type="text", name="choice_{{id}}", placeholder="Enter choice text here...", class="form-control newPollChoice")
 
 	script.
 		var currentId = 1; // id of current choice
@@ -30,7 +30,7 @@ block content
 			appendNewChoice();
 		});
 
-		$('.closePollChoice').on('click', function(e) {
+		$(document).on('click', '.closePollChoice', function(e) {
 			$(this).parent().remove();
 		});
 
