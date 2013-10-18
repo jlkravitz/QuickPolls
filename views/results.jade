@@ -2,8 +2,24 @@ extends layout
 
 block content
 	div.container
-		h1= question
-		ul
+		h1(id="resultsQuestion")
+			=question
+		ul(id="resultsChoices")
 			each votes, choice in choices
-				li= choice
-				| #{votes}
+				li
+					=choice
+					span(class="progressBar", data-votes="#{votes}", data-toggle="tooltip", title='#{votes} votes')
+
+	script.
+		$('.progressBar').tooltip();
+		var max = 0;
+		$('.progressBar').each(function(i, elem){
+			var votes = parseInt($(elem).data('votes'));
+			if (votes > max){
+				max = votes;
+			}
+		});
+		$('.progressBar').each(function(i, elem){
+			var votes = parseInt($(elem).data('votes'));
+			$(this).width(votes / max * 100);
+		});

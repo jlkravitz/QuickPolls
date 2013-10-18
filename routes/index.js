@@ -44,7 +44,6 @@ exports.showPoll = function(req, res){
 
 exports.vote = function(req, res){
 	pollProvider.vote(req.body.code, req.body.choice, function(error, poll){
-		console.log("VOTED", poll)
 		if (error){
 			res.status(404).send('Cannot Vote on Nonexistent Poll.');
 		} else {
@@ -55,7 +54,6 @@ exports.vote = function(req, res){
 
 exports.pollResults = function(req, res){
 	pollProvider.findByCode(req.params.code, function(error, poll){
-		console.log("RESULTS", poll)
 		if (poll){
 			res.render('results', {
 				title: poll.question,
