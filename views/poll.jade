@@ -3,7 +3,8 @@ extends layout
 block content
 	div.container
 		h1= question
-		form(action="/", method="post")
+		form(action="/poll/vote", method="post")
+			input(type="hidden", name="code", value="#{code}")
 			each choice, i in choices
 				div.radio
 					label

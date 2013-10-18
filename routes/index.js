@@ -19,12 +19,26 @@ exports.createPoll = function(req, res){
 			question: question,
 			choices: choices
 		}, function(error, pollCode){
-			res.render('share', { title: 'Share your poll', question: question, choices: choices, code: pollCode });
+			res.render('share', {
+				title: 'Share your poll',
+				question: question,
+				choices: choices,
+				code: pollCode
+			});
 		});
 };
 
 exports.showPoll = function(req, res){
 	pollProvider.findByCode(req.params.code, function(error, poll){
-		res.render('poll', { title: poll.question, question: poll.question, choices: poll.choices });
+		if (poll){
+			res.render('poll', {
+				title: poll.question,
+				question: poll.question,
+				choices: poll.choices,
+				code: req.params.code
+			});
+		} else {
+			res.status(404).send('Poll Not Found.');
+		}
 	});
 };
