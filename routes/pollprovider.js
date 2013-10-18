@@ -10,11 +10,8 @@ PollProvider.prototype.findByCode = function(code, callback){
 }
 
 PollProvider.prototype.save = function(poll, callback){
-	console.log('Saving...');
 	var code = generateCode.call(this);
-	console.log('Generated code...' + code);
 	this.polls[code] = poll;
-	console.log('About to call callback...');
 	callback(null, code);
 
 	function generateCode(){
