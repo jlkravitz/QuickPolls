@@ -42,3 +42,13 @@ exports.showPoll = function(req, res){
 		}
 	});
 };
+
+exports.vote = function(req, res){
+	pollProvider.vote(req.body.code, req.body.choice, function(error, poll){
+		if (error){
+			res.status(404).send('Cannot Vote on Nonexistent Poll.');
+		} else {
+			res.redirect('/poll/' + req.body.code);
+		}
+	});
+};
