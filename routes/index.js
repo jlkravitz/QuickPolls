@@ -1,7 +1,4 @@
-
-/*
- * GET home page.
- */
+var pollProvider = new (require('./pollprovider').PollProvider);
 
 exports.index = function(req, res){
 	res.render('index', { title: 'QuickPolls' });
@@ -18,11 +15,16 @@ exports.share = function(req, res){
 			}
 		}
 
-		var PollProvider = new (require('./pollprovider').PollProvider);
-		PollProvider.save({
+		pollProvider.save({
 			question: question,
 			choices: choices
 		}, function(error, pollCode){
 			res.render('share', { title: 'Share your poll', question: question, choices: choices, code: pollCode });
 		});
+};
+
+exports.poll= function(req, res){
+	pollProvider.findByCode(req.params.code, function(error, poll){
+		res.render('poll', { title: poll.question, question: poll.question, choices: poll.choices });
+	});
 };

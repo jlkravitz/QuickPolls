@@ -30,6 +30,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.post('/', routes.share);
+app.get('/poll/:code', routes.poll);
 app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){

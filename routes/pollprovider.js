@@ -5,7 +5,7 @@ PollProvider = function(){
 PollProvider.prototype.polls = {};
 
 PollProvider.prototype.findByCode = function(code, callback){
-	var result = polls[code] || null;
+	var result = this.polls[code] || null;
 	callback(null, result);
 }
 
@@ -25,7 +25,7 @@ PollProvider.prototype.save = function(poll, callback){
 		    	break;
 		    }
 	    }
-	    
+
 	    return code;
 	};
 };
