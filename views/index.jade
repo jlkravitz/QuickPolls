@@ -4,7 +4,7 @@ block content
 	div.container
 		h1= title
 		p Welcome to #{title}
-		form(action="/", method="get")
+		form(action="/", method="post")
 			div.form-group
 				label(for="newPollQuestion") Question
 				input(type="text", name="question", placeholder="What would you like to ask?", class="form-control", id="newPollQuestion")

@@ -1,0 +1,15 @@
+extends layout
+
+block content
+	div.container
+		h1= title
+		p Great! You've created your poll.
+		span.question= question
+		ul.choices
+			each choice in choices
+				li= choice
+
+		| Click
+		a(href="share/#{code}/")  here
+		|  to see your live poll!
+	
