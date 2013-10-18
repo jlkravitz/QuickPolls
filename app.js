@@ -29,8 +29,8 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.post('/', routes.share);
-app.get('/poll/:code', routes.poll);
+app.post('/poll/create', routes.createPoll);
+app.get('/poll/:code', routes.showPoll);
 app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){

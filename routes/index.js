@@ -4,7 +4,7 @@ exports.index = function(req, res){
 	res.render('index', { title: 'QuickPolls' });
 };
 
-exports.share = function(req, res){
+exports.createPoll = function(req, res){
 		var question = req.body.question;
 		delete req.body.question;
 
@@ -23,7 +23,7 @@ exports.share = function(req, res){
 		});
 };
 
-exports.poll= function(req, res){
+exports.showPoll = function(req, res){
 	pollProvider.findByCode(req.params.code, function(error, poll){
 		res.render('poll', { title: poll.question, question: poll.question, choices: poll.choices });
 	});
