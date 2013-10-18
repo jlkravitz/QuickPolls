@@ -9,16 +9,22 @@ PollProvider.prototype.findByCode = function(code, callback){
 	callback(false, result);
 }
 
-/* Saves poll to temporary storage. 
- * 
- * First, a votes array is added to the poll. Then, a code
- * is generated to associate with the poll. */
-PollProvider.prototype.save = function(poll, callback){
-	poll.votes = [];
-	for (var i = 0; i < poll.choices.length; i++){
-		poll.votes.push(0);
-	}
+PollProvider.prototype.createPoll = function(question, choices, callback){
+	var poll = {};
+	poll['question'] = question;
+	poll['choiceList'] = choices;
 
+	var choiceToVotes = {};
+	for (var i = 0; i < choices.length; i++) {
+		choiceToVotes[choices[i]] = 0;
+	}
+	poll['choiceToVotes'] = choiceToVotes;
+
+	callback(false, poll);
+}
+
+/* Saves poll to temporary storage. */
+PollProvider.prototype.save = function(poll, callback){
 	var code = generateCode.call(this);
 	this.polls[code] = poll;
 	callback(false, code);
@@ -38,9 +44,9 @@ PollProvider.prototype.save = function(poll, callback){
 
 PollProvider.prototype.vote = function(code, choice, callback){
 	var poll = this.polls[code] || null;
-	console.log(this.polls, code, poll)
 	if (poll){
-		poll.votes[choice]++;
+		var choiceText = poll.choiceList[parseInt(choice)];
+		poll.choiceToVotes[choiceText]++;
 		callback(false, poll);
 	} else {
 		callback(true, poll);
