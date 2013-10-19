@@ -2,7 +2,6 @@ extends layout
 
 block content
 	div.container
-		a(href="/poll/#{code}") Back to poll
 		h1(id="resultsQuestion")
 			=question
 		table(id="resultsChoices")
@@ -18,6 +17,8 @@ block content
 						votes
 					td
 						span(class="progressBar", data-votes="#{votes}", data-toggle="tooltip", title='#{votes} votes')
+
+		a(href="/poll/#{code}", style="float:right;") Back to poll	
 
 	script.
 		$('.progressBar').tooltip();
