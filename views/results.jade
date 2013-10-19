@@ -4,11 +4,19 @@ block content
 	div.container
 		h1(id="resultsQuestion")
 			=question
-		ul(id="resultsChoices")
+		table(id="resultsChoices")
+			tr
+				th Choice
+				th Votes
+				th
 			each votes, choice in choices
-				li
-					=choice
-					span(class="progressBar", data-votes="#{votes}", data-toggle="tooltip", title='#{votes} votes')
+				tr
+					td
+						span(class="resultsChoiceText")= choice
+					td= votes
+						votes
+					td
+						span(class="progressBar", data-votes="#{votes}", data-toggle="tooltip", title='#{votes} votes')
 
 	script.
 		$('.progressBar').tooltip();
