@@ -10,16 +10,36 @@ body
 .closePollChoice:hover
 	color #b94a48
 
+/* VOTE */
+#pollVoting
+	h1
+		text-align center
+	.choice
+		display block
+		height 50px
+		margin 16px
+
+		span
+			display inline-block
+			padding-top 8px
+
+		input
+			display none
+
 
 /* RESULTS */
 #resultsQuestion
 	text-align center
 #resultsChoices
 	margin 40px auto
-	th, td
-		width 100px
+	th:first-child, td:first-child
+		min-width 150px
+	/* Set width of animated bar so that
+	 * table stays in place during animation. */
+	th:nth-child(3), td:nth-child(3)
+		width 110px
 .progressBar
 	display block
 	height 10px
 	background #add8e6
-	transition width 0.5s
+	transition width 0.7s
