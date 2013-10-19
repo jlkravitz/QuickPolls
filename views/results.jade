@@ -2,6 +2,7 @@ extends layout
 
 block content
 	div.container
+		a(href="/poll/#{code}") Back to poll
 		h1(id="resultsQuestion")
 			=question
 		table(id="resultsChoices")

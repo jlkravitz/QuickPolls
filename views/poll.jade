@@ -11,6 +11,7 @@ block content
 					span= choice
 
 	script.
-		$('input[type="radio"]').on('click', function(){
+		$('label').on('click', function(){
+			$(this).children('input').attr('checked', true);
 			$(this).parent('form').submit();
 		});

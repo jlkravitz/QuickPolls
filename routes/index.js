@@ -59,6 +59,7 @@ exports.pollResults = function(req, res){
 				title: poll.question,
 				question: poll.question,
 				choices: poll.choiceToVotes,
+				code: req.params.code
 			});
 		} else {
 			res.status(404).send('Poll not found.');
