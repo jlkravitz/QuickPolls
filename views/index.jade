@@ -16,7 +16,7 @@ block content
 
 		template#newPollChoiceTemplate
 			div.form-group
-				button.close.closePollChoice x
+				button(class="close closePollChoice", tabindex="-1") x
 				input(type="text", name="choice_{{id}}", placeholder="Enter choice text here...", class="form-control newPollChoice")
 
 	script.
