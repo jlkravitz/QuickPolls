@@ -21,15 +21,4 @@ block content
 		a(href="/poll/#{code}", style="float:right;") Back to poll	
 
 	script.
-		$('.progressBar').tooltip();
-		var max = 0;
-		$('.progressBar').each(function(i, elem){
-			var votes = parseInt($(elem).data('votes'));
-			if (votes > max){
-				max = votes;
-			}
-		});
-		$('.progressBar').each(function(i, elem){
-			var votes = parseInt($(elem).data('votes'));
-			$(this).width(votes / max * 100);
-		});
+		Results.setup();
