@@ -12,6 +12,11 @@ block content
 				label Choices
 			button(type="button", class="btn btn-link", id="addPollChoice") Add Choice
 			br
+			input(type="checkbox", id="publicPoll")
+			label(for="publicPoll") Public
+			span(data-toggle="tooltip", title="Public polls are viewable by all users on the home page")
+				span(class="glyphicon glyphicon-question-sign")
+			br
 			button(type="submit", class="btn btn-default") Submit
 
 		template#newPollChoiceTemplate

@@ -1,3 +1,7 @@
+$(function() {
+	$("[data-toggle='tooltip']").tooltip();
+});
+
 var QuestionCreator = (function() {
 	// id of current choice (only has to be unique, not consecutive)
 	var currentId = 1;
