@@ -8,6 +8,7 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
+var cookieParser = require('cookie-parser')
 
 var app = express();
 
@@ -17,6 +18,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.favicon());
 app.use(express.logger('dev'));
+app.use(cookieParser());
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
@@ -30,6 +32,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.post('/poll/create', routes.createPoll);
+app.get('/poll/badvote', routes.badVote);
 app.get('/poll/:code', routes.showPoll);
 app.post('/poll/vote', routes.vote);
 app.get('/poll/results/:code', routes.pollResults);

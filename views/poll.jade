@@ -11,7 +11,14 @@ block content
 					span= choice
 
 	script.
-		$('label').on('click', function(){
+		// We check this on the server side, but check here just in case.
+		// There are cases where the user could access the poll otherwise (e.g.
+		// with the back button).
+		var taken = $.cookie('takenPolls') || '';
+		if (taken.indexOf('#{code}') != -1) {
+			location.href = '/poll/badvote';
+		}
+		$('label').on('click', function() {
 			$(this).children('input').attr('checked', true);
 			$(this).parent('form').submit();
 		});

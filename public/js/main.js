@@ -80,9 +80,19 @@ var Results = (function() {
 			}
 		});
 		return max;
-	}
+	};
 
-	var setup = function() {
+	var setTakenPoll = function(code) {
+		var taken = $.cookie('takenPolls') || '';
+		if (taken.indexOf(code) == -1) taken += (code + ',');
+		$.cookie('takenPolls', taken, {
+			expires: 10000,
+			path: '/'
+		});
+	};
+
+	var setup = function(code) {
+		setTakenPoll(code);
 		$('.progressBar').tooltip();
 		var maxVotes = getMaxVotes();
 		$('.progressBar').each(function(i, elem){

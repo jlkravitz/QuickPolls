@@ -18,7 +18,7 @@ block content
 					td
 						span(class="progressBar", data-votes="#{votes}", data-toggle="tooltip", title='#{votes} votes')
 
-		a(href="/poll/#{code}", style="float:right;") Back to poll	
+		//- a(href="/poll/#{code}", style="float:right;") Back to poll	
 
 	script.
-		Results.setup();
+		Results.setup('#{code}');
